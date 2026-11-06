@@ -129,7 +129,10 @@ public class DjenConnector implements SourceConnector {
         String categoria = tf.startsWith("acordao") || tf.startsWith("ementa") ? "ACORDAO"
                 : tf.startsWith("sentenca") ? "SENTENCA" : "DECISAO_MONOCRATICA";
         d.put("tipoDecisao", categoria);
-        d.put("categoria", categoria);
+        String classeFold = Texts.fold(it.path("nomeClasse").asText(""));
+        boolean controle = classeFold.contains("inconstitucionalidade") || classeFold.contains("declaratoria de constitucionalidade")
+                || classeFold.contains("descumprimento de preceito");
+        d.put("categoria", controle ? "CONTROLE_CONCENTRADO" : categoria);
         d.put("statusPublicacao", "PUBLICADA");
         String data = it.path("data_disponibilizacao").asText(null);
         d.put("dataPublicacao", data != null && data.length() >= 10 ? data.substring(0, 10) : null);

@@ -134,7 +134,7 @@ public class PlanaltoParser {
 
     private void adicionarLinhas(List<Linha> out, String bruto) {
         for (String parte : bruto.split("\n")) {
-            String limpo = parte.replace(' ', ' ').replaceAll("\\s+", " ").trim();
+            String limpo = parte.replace('\u00A0', ' ').replaceAll("\\s+", " ").strip(); // strip(): trim() apagaria os marcadores de texto riscado
             if (limpo.isEmpty()) continue;
             int riscados = 0, total = 0;
             boolean dentro = false;

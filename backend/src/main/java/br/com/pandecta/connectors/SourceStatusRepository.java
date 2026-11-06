@@ -96,7 +96,7 @@ public class SourceStatusRepository {
     public void marcarRecursoProcessado(String fonteId, String chave) {
         try {
             db.collection("processedResources").document(Texts.sha256(fonteId + "|" + chave))
-                    .set(Map.of("fonteId", fonteId, "chave", chave, "em", Instant.now().toString())).get();
+                    .set(Map.<String, Object>of("fonteId", fonteId, "chave", chave, "em", Instant.now().toString())).get();
         } catch (Exception e) {
             log.warn("Falha ao marcar recurso processado: {}", e.getMessage());
         }
