@@ -56,7 +56,7 @@ public class RateLimitFilter extends OncePerRequestFilter {
         String uri = req.getRequestURI();
         String grupo;
         Limit limit;
-        if (uri.startsWith("/api/auth/login") || uri.startsWith("/api/auth/register") || uri.startsWith("/api/me/senha")) {
+        if (uri.startsWith("/api/auth/entrar") || uri.startsWith("/api/auth/registrar") || uri.startsWith("/api/auth/qr") || uri.startsWith("/api/me/senha")) {
             grupo = "auth"; limit = AUTH;
         } else if (uri.startsWith("/api/ia/")) {
             grupo = "ia"; limit = IA;
