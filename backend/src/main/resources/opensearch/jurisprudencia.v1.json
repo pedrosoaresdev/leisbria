@@ -224,6 +224,9 @@
       },
       "hashConteudo": {
         "type": "keyword"
+      },
+      "tribunalNome": {
+        "type": "keyword"
       }
     }
   }

@@ -138,6 +138,12 @@ public class SearchClient {
         return ok;
     }
 
+    /** Remove documentos que casam com a consulta (ex.: dispositivos antigos de uma norma reimportada). */
+    public long deleteByQuery(String index, ObjectNode query) {
+        Response r = call("POST", "/" + index + "/_delete_by_query?conflicts=proceed&refresh=true", query);
+        return r.ok() ? r.body().path("deleted").asLong(0) : 0;
+    }
+
     public void refresh(String index) {
         call("POST", "/" + index + "/_refresh", null);
     }

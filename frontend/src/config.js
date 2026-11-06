@@ -1,3 +1,6 @@
+// Endereço para doações em bitcoin (pode ser sobrescrito por VITE_BITCOIN_ADDRESS)
+export const BITCOIN_ADDRESS = import.meta.env.VITE_BITCOIN_ADDRESS || 'bc1qv6a27cnp0gmc9nsmz5a88jj4dq73cexgn87ct9';
+
 export const API_URL = (import.meta.env.VITE_API_URL || '').replace(/\/$/, '');
 export const PREVIEW = import.meta.env.VITE_PREVIEW === 'true';
 

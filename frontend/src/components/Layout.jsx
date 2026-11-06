@@ -73,6 +73,7 @@ function Header() {
           ) : (
             <Link to="/entrar" className="btn btn-ghost btn-sm">Entrar</Link>
           )}
+          <Link to="/apoiar" className="btn btn-gold btn-sm apoiar-btn">Apoiar</Link>
         </div>
       </div>
       {aberto && (
@@ -102,6 +103,7 @@ function Header() {
             <hr />
             <NavLink to="/fontes">Fontes oficiais e sincronização</NavLink>
             <NavLink to="/sobre">Sobre a plataforma</NavLink>
+            <NavLink to="/apoiar">Apoie o projeto (Bitcoin)</NavLink>
           </nav>
         </>
       )}
@@ -124,6 +126,7 @@ function Footer() {
           <strong style={{ color: '#fff' }}>Plataforma</strong>
           <Link to="/fontes">Fontes e sincronização</Link>
           <Link to="/sobre">Sobre e metodologia</Link>
+          <Link to="/apoiar" style={{ color: 'var(--gold-500)' }}>Apoie com Bitcoin</Link>
         </div>
         <div className="stack" style={{ gap: 6 }}>
           <strong style={{ color: '#fff' }}>Fontes oficiais</strong>

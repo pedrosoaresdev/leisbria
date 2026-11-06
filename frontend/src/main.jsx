@@ -22,6 +22,7 @@ const Cadastro = lazy(() => import('./pages/Auth').then((m) => ({ default: m.Cad
 const QrAprovar = lazy(() => import('./pages/Auth').then((m) => ({ default: m.QrAprovar })));
 const Notificacoes = lazy(() => import('./pages/Misc').then((m) => ({ default: m.Notificacoes })));
 const Sobre = lazy(() => import('./pages/Misc').then((m) => ({ default: m.Sobre })));
+const Apoiar = lazy(() => import('./pages/Apoiar'));
 const NotFound = lazy(() => import('./pages/Misc').then((m) => ({ default: m.NotFound })));
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -43,6 +44,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                 <Route path="controle" element={<Controle />} />
                 <Route path="fontes" element={<Fontes />} />
                 <Route path="sobre" element={<Sobre />} />
+                <Route path="apoiar" element={<Apoiar />} />
                 <Route path="entrar" element={<Entrar />} />
                 <Route path="cadastro" element={<Cadastro />} />
                 <Route path="qr/:id" element={<QrAprovar />} />

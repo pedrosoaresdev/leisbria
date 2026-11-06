@@ -188,6 +188,10 @@
       },
       "hashConteudo": {
         "type": "keyword"
+      },
+      "marcador": {
+        "type": "keyword",
+        "index": false
       }
     }
   }
