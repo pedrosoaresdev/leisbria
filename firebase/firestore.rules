@@ -1,0 +1,12 @@
+rules_version = '2';
+
+// Todo acesso ao Firestore passa pelo backend (Firebase Admin SDK, que ignora estas regras).
+// Clientes (navegador/app) não leem nem gravam diretamente: isso centraliza validação,
+// rate limiting, auditoria e evita exposição de dados de outros usuários.
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

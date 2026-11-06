@@ -1,0 +1,83 @@
+server:
+  port: ${SERVER_PORT:8080}
+  compression:
+    enabled: true
+    mime-types: application/json,text/plain
+    min-response-size: 2048
+  error:
+    include-message: never
+    include-stacktrace: never
+
+spring:
+  application:
+    name: pandecta-backend
+  jackson:
+    default-property-inclusion: non_null
+    time-zone: America/Sao_Paulo
+  cache:
+    type: caffeine
+    caffeine:
+      spec: maximumSize=5000,expireAfterWrite=10m
+  task:
+    scheduling:
+      pool:
+        size: 4
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus,metrics
+  endpoint:
+    health:
+      show-details: never
+
+logging:
+  level:
+    root: INFO
+    br.com.pandecta: INFO
+  pattern:
+    console: "%d{ISO8601} %-5level [%thread] %logger{36} - %msg%n"
+
+pandecta:
+  cors-allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:5173}
+  frontend-public-url: ${FRONTEND_PUBLIC_URL:http://localhost:5173}
+  admin-uids: ${ADMIN_UIDS:}
+  user-agent: ${CONNECTOR_USER_AGENT:PandectaBot/1.0}
+  search:
+    url: ${OPENSEARCH_URL:http://localhost:9200}
+    username: ${OPENSEARCH_USERNAME:}
+    password: ${OPENSEARCH_PASSWORD:}
+    index-prefix: ${OPENSEARCH_INDEX_PREFIX:pandecta}
+  firebase:
+    project-id: ${FIREBASE_PROJECT_ID:}
+    credentials-path: ${FIREBASE_CREDENTIALS_PATH:}
+    web-api-key: ${FIREBASE_WEB_API_KEY:}
+    synthetic-email-domain: ${AUTH_SYNTHETIC_EMAIL_DOMAIN:usuarios.pandecta.invalid}
+  ai:
+    api-key: ${ANTHROPIC_API_KEY:}
+    model: ${ANTHROPIC_MODEL:claude-sonnet-5-5}
+    max-sources: ${AI_MAX_SOURCES:14}
+  sync:
+    on-startup: ${SYNC_ON_STARTUP:true}
+    planalto-cron: ${SYNC_PLANALTO_CRON:0 30 3 * * *}
+    lexml-cron: ${SYNC_LEXML_CRON:0 0 */6 * * *}
+    djen-cron: ${SYNC_DJEN_CRON:0 */30 * * * *}
+    datajud-cron: ${SYNC_DATAJUD_CRON:0 15 */2 * * *}
+    stj-cron: ${SYNC_STJ_CRON:0 0 4 * * *}
+  datajud:
+    api-key: ${DATAJUD_API_KEY:}
+    base-url: https://api-publica.datajud.cnj.jus.br
+    radar-aliases: ${DATAJUD_RADAR_ALIASES:stj,tst,trf1,tjsp}
+    max-per-run: ${DATAJUD_MAX_PER_RUN:500}
+  djen:
+    base-url: https://comunicaapi.pje.jus.br/api/v1
+    tribunais: ${DJEN_TRIBUNAIS:STJ,TST,TJSP}
+    tipos-documento: ${DJEN_TIPOS_DOCUMENTO:Acórdão,Sentença,Decisão,Ementa}
+    max-pages-per-tribunal: ${DJEN_MAX_PAGES_PER_TRIBUNAL:5}
+  stj:
+    ckan-url: ${STJ_CKAN_URL:https://dadosabertos.web.stj.jus.br}
+    dataset-query: ${STJ_DATASET_QUERY:espelhos-de-acordaos}
+    max-resources-per-run: ${STJ_MAX_RESOURCES_PER_RUN:3}
+  lexml:
+    sru-url: https://www.lexml.gov.br/busca/SRU

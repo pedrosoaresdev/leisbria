@@ -1,0 +1,9 @@
+.env
+secrets/
+node_modules/
+dist/
+target/
+.idea/
+.vscode/
+*.log
+.DS_Store

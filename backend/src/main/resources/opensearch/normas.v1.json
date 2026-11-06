@@ -1,0 +1,189 @@
+{
+  "settings": {
+    "number_of_shards": 1,
+    "number_of_replicas": 0,
+    "max_result_window": 50000,
+    "analysis": {
+      "filter": {
+        "pt_stop": {
+          "type": "stop",
+          "stopwords": "_brazilian_"
+        },
+        "pt_stem": {
+          "type": "stemmer",
+          "language": "light_portuguese"
+        },
+        "pt_syn": {
+          "type": "synonym_graph",
+          "lenient": true,
+          "synonyms": [
+            "cf, cf88, constituição federal, constituição",
+            "cpp, código de processo penal",
+            "cp, código penal",
+            "cpc, código de processo civil",
+            "cc, código civil",
+            "ctn, código tributário nacional",
+            "cdc, código de defesa do consumidor",
+            "clt, consolidação das leis do trabalho",
+            "eca, estatuto da criança e do adolescente",
+            "lep, lei de execução penal",
+            "lgpd, lei geral de proteção de dados",
+            "lai, lei de acesso à informação",
+            "stf, supremo tribunal federal",
+            "stj, superior tribunal de justiça",
+            "tst, tribunal superior do trabalho",
+            "hc, habeas corpus",
+            "ms, mandado de segurança",
+            "adi, ação direta de inconstitucionalidade",
+            "adpf, arguição de descumprimento de preceito fundamental",
+            "resp, recurso especial",
+            "re, recurso extraordinário",
+            "preso, presa, prisão, detido, custodiado",
+            "flagrante, prisão em flagrante",
+            "audiência de custódia, apresentação ao juiz",
+            "bloqueio, bloqueada, bloqueado, constrição, indisponibilidade",
+            "conta bancária, conta corrente, depósito bancário",
+            "indevido, indevidamente, ilegal, ilegalmente, abusivo",
+            "dano moral, danos morais, indenização"
+          ]
+        }
+      },
+      "analyzer": {
+        "pt_index": {
+          "tokenizer": "standard",
+          "filter": [
+            "lowercase",
+            "asciifolding",
+            "pt_stop",
+            "pt_stem"
+          ]
+        },
+        "pt_search": {
+          "tokenizer": "standard",
+          "filter": [
+            "lowercase",
+            "asciifolding",
+            "pt_syn",
+            "pt_stop",
+            "pt_stem"
+          ]
+        }
+      },
+      "normalizer": {
+        "kw": {
+          "type": "custom",
+          "filter": [
+            "lowercase",
+            "asciifolding"
+          ]
+        }
+      }
+    }
+  },
+  "mappings": {
+    "dynamic": "strict",
+    "properties": {
+      "id": {
+        "type": "keyword"
+      },
+      "tipo": {
+        "type": "keyword"
+      },
+      "esfera": {
+        "type": "keyword"
+      },
+      "localidade": {
+        "type": "keyword"
+      },
+      "numero": {
+        "type": "keyword"
+      },
+      "ano": {
+        "type": "integer"
+      },
+      "titulo": {
+        "type": "text",
+        "analyzer": "pt_index",
+        "search_analyzer": "pt_search",
+        "fields": {
+          "kw": {
+            "type": "keyword",
+            "normalizer": "kw",
+            "ignore_above": 512
+          }
+        }
+      },
+      "apelido": {
+        "type": "text",
+        "analyzer": "pt_index",
+        "search_analyzer": "pt_search",
+        "fields": {
+          "kw": {
+            "type": "keyword",
+            "normalizer": "kw",
+            "ignore_above": 512
+          }
+        }
+      },
+      "siglas": {
+        "type": "keyword"
+      },
+      "ementa": {
+        "type": "text",
+        "analyzer": "pt_index",
+        "search_analyzer": "pt_search"
+      },
+      "assuntos": {
+        "type": "keyword"
+      },
+      "dataPublicacao": {
+        "type": "date",
+        "format": "strict_date_optional_time||yyyy-MM-dd||epoch_millis"
+      },
+      "dataVigencia": {
+        "type": "date",
+        "format": "strict_date_optional_time||yyyy-MM-dd||epoch_millis"
+      },
+      "situacao": {
+        "type": "keyword"
+      },
+      "urn": {
+        "type": "keyword"
+      },
+      "textoDisponivel": {
+        "type": "boolean"
+      },
+      "totalDispositivos": {
+        "type": "integer"
+      },
+      "estrutura": {
+        "type": "object",
+        "enabled": false
+      },
+      "historicoAlteracoes": {
+        "type": "object",
+        "enabled": false
+      },
+      "fonte": {
+        "type": "keyword"
+      },
+      "fonteNome": {
+        "type": "keyword"
+      },
+      "urlOficial": {
+        "type": "keyword",
+        "index": false
+      },
+      "conector": {
+        "type": "keyword"
+      },
+      "sincronizadoEm": {
+        "type": "date",
+        "format": "strict_date_optional_time||yyyy-MM-dd||epoch_millis"
+      },
+      "hashConteudo": {
+        "type": "keyword"
+      }
+    }
+  }
+}
