@@ -120,9 +120,17 @@ export default function NormaViewer() {
           </div>
         </div>
       </div>
+      {norma.textoDisponivel === false && (
+        <div style={{ marginBottom: 12 }}>
+          <Notice kind="info">
+            O texto integral desta norma ainda não está na base (registro obtido do {norma.fonteNome}, apenas com identificação e ementa).{' '}
+            <a href={norma.urlOficial} target="_blank" rel="noreferrer noopener">Consulte o texto na fonte oficial</a>.
+          </Notice>
+        </div>
+      )}
       {norma.amostra && <div style={{ marginBottom: 12 }}><Notice kind="warn">Pré-visualização: apenas um trecho do texto oficial (arts. 1º a 3º e parte do art. 5º). O texto integral é importado do Planalto pela sincronização.</Notice></div>}
 
-      <div className="reader">
+      {dispositivos.length > 0 && <div className="reader">
         <aside className="panel toc no-print" aria-label="Sumário">
           <div className="panel-head"><h3>Sumário</h3><span className="spacer" /><span className="xsmall muted">{artigos.length} artigos</span></div>
           <form className="row" style={{ padding: '10px 12px 0', flexWrap: 'nowrap' }} onSubmit={irPara}>
@@ -187,7 +195,7 @@ export default function NormaViewer() {
             ))}
           </div>
         </article>
-      </div>
+      </div>}
       {hist && <Historico dispositivo={hist} onClose={() => setHist(null)} />}
     </div>
   );
